@@ -102,13 +102,13 @@ class Admin extends Admin_Controller
 	{
 		// Set the validation rules from the array above
 		$this->form_validation->set_rules($this->item_validation_rules);
-		$banner = $this->banner_m->get_by('id', $id);
-		$banner->all_pages = $this->page_m->dropdown('id', 'title');
+		$banner = $this->banner_m->get_banner($id);
+		$banner->all_pages = $this->page_m->order_by('uri')->dropdown('id', 'title');
 
 		if($this->form_validation->run())
 		{
 			// See if the model can create the record
-			if(($id = $this->banner_m->update($id, $this->input->post())) > 0)
+			if(($id = $this->banner_m->update_banner($id, $this->input->post())) > 0)
 			{
 				// All good...
 				$this->session->set_flashdata('success', lang('banners:edit_success'));
@@ -130,7 +130,19 @@ class Admin extends Admin_Controller
 
 	public function images($id = 0)
 	{
-		echo $id;
+		$this->load->model('banner_image_m');
+
+		$data->banner 			= $this->banner_m->get($id);
+		$data->banner->images 	= $this->banner_image_m->where('folder_id', $id)->get_all();
+
+		$this->template->title($this->module_details['name'], lang('banners:edit'))
+						->append_metadata(css('admin.css', 'banners'))
+						->append_metadata(css('jquery.fileupload-ui.css', 'banners'))
+						->append_metadata(js('jquery.fileupload-ui.js', 'banners'))
+						->append_metadata(js('jquery.fileupload.js', 'banners'))
+						->append_metadata(js('upload.js', 'banners'))
+						->append_metadata(js('functions.js', 'banners'))
+						->build('admin/images', $data);
 	}
 	
 	public function delete($id = 0)

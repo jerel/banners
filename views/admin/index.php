@@ -33,6 +33,7 @@
 					<td><?php echo $banner->image_count; ?></td>
 					<td>
 						<?php echo
+						anchor('admin/banners/images/'		. $banner->id, 	lang('banners:images')) 					. ' | ' .
 						anchor('admin/banners/edit/'		. $banner->id, 	lang('global:edit')) 					. ' | ' .
 						anchor('admin/banners/delete/' 	. $banner->id, 	lang('global:delete'), array('class'=>'confirm')); ?>
 					</td>

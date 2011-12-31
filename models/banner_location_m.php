@@ -45,4 +45,11 @@ class Banner_location_m extends MY_Model {
 
 		return in_array(FALSE, $status) ? FALSE : TRUE;
 	}
+
+	public function update_location($id, $input)
+	{
+		$this->delete_by('banner_id', $id);
+
+		return $this->create($id, $input);
+	}
 }

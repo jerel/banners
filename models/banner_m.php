@@ -44,6 +44,85 @@ class Banner_m extends MY_Model {
 	}
 
 	/**
+	 * Update Banner
+	 * 
+	 * update a banner set
+	 *
+	 * @param 	int 	$id 	The banner id
+	 * @param 	array 	$input 	The sanitized post data
+	 * @return 	int
+	 */
+	public function update_banner($id, $input)
+	{
+		$to_update = array(
+			'name'			=> $input['name'],
+			'text'			=> $input['text']
+			);
+
+		$id = (int) $this->update($id, $to_update);
+
+		// now record the uri
+		if ($id AND count($input['pages']) > 0 OR $input['urls'] > '')
+		{
+			if ( ! $this->banner_location_m->update_location($id, $input))
+			{
+				$id = FALSE;
+			}
+		}
+
+		return $id;
+	}
+
+	/**
+	 * Get Banner
+	 * 
+	 * get a banner to edit
+	 *
+	 * @param 	string 	$id 	The banner id
+	 * @return 	mixed
+	 */
+	public function get_banner($id)
+	{
+		$page_array = array();
+		$url_array 	= array();
+
+		$banner = $this->get($id);
+
+		// retrieve all locations that we know are pages
+		$pages = $this->banner_location_m->where('page_id >', 0)
+			->where('banner_id', $id)
+			->get_all();
+		
+		// now all the url patterns
+		$urls = $this->banner_location_m->where('page_id', 0)
+			->where('banner_id', $id)
+			->get_all();
+
+		if ($pages)
+		{
+			// loop through the location records and save the page id
+			foreach ($pages AS $page)
+			{
+				$page_array[] = $page->page_id;
+			}
+		}
+
+		if ($urls)
+		{
+			// build an array of urls so we can implode them with newline
+			foreach ($urls AS $url)
+			{
+				$url_array[] = $url->uri;
+			}
+		}
+
+		$banner->pages = $page_array;
+		$banner->urls = implode("\n", $url_array);
+
+		return $banner;
+	}
+
+	/**
 	 * Get Banners
 	 * 
 	 * get all banners for the current page/uri
