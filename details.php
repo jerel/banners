@@ -18,7 +18,7 @@ class Module_Banners extends Module {
 			'menu' => 'design',
 			'shortcuts' => array(
 				array(
-			 	   'name' => 'banners:add_banner',
+			 	   'name' => 'banners:create',
 				   'uri' => 'admin/banners/create',
 				   'class' => 'add'
 				),
@@ -33,6 +33,7 @@ class Module_Banners extends Module {
 	public function install()
 	{
 		$this->dbforge->drop_table('banners');
+		$this->dbforge->drop_table('banner_locations');
 
 		$banners = array(
                         'id' => array(
@@ -45,7 +46,7 @@ class Module_Banners extends Module {
 										'constraint' => '100',
 										'default' => ''
 										),
-						'locations' => array(
+						'text' => array(
 										'type' => 'TEXT'
 										),
 						'folder_id' => array(
@@ -57,17 +58,44 @@ class Module_Banners extends Module {
 
 		$this->dbforge->add_field($banners);
 		$this->dbforge->add_key('id', TRUE);
+		$this->dbforge->create_table('banners');
 
-		if($this->dbforge->create_table('banners') AND
-		   is_dir($this->upload_path.'files') OR @mkdir($this->upload_path.'files',0777,TRUE))
-		{
-			return TRUE;
-		}
+		$banner_locations = array(
+                        'id' => array(
+									  'type' => 'INT',
+									  'constraint' => '11',
+									  'auto_increment' => TRUE
+									  ),
+						'banner_id' => array(
+										'type' => 'INT',
+										'constraint' => '11',
+										'default' => 0
+										),
+						'page_id' => array(
+										'type' => 'INT',
+										'constraint' => '11',
+										'default' => 0
+										),
+						'uri' => array(
+										'type' => 'VARCHAR',
+										'constraint' => '255',
+										'default' => ''
+										)
+						);
+
+		$this->dbforge->add_field($banner_locations);
+		$this->dbforge->add_key('id', TRUE);
+		$this->dbforge->create_table('banner_locations');
+
+		is_dir($this->upload_path.'files') OR @mkdir($this->upload_path.'files',0777,TRUE);
+
+		return TRUE;
 	}
 
 	public function uninstall()
 	{
-		if ($this->dbforge->drop_table('banners'))
+		if ($this->dbforge->drop_table('banners') AND
+			$this->dbforge->drop_table('banner_locations'))
 		{
 			return TRUE;
 		}
