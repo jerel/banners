@@ -6,6 +6,7 @@
  * @website		http://unruhdesigns.com
  * @package 	PyroCMS
  * @subpackage 	Banners Module
+ * @copyright	2012 by Jerel Unruh
  */
 class Admin extends Admin_Controller
 {
@@ -55,7 +56,7 @@ class Admin extends Admin_Controller
 
 		foreach ($data->banners AS &$banner)
 		{
-			$banner->image_count = $this->file_m->count_by('folder_id', $banner->folder_id);
+			$banner->image_count = $this->file_m->count_by('folder_id', $banner->id);
 		}
 
 		$data->pagination = create_pagination('admin/banners/index', $this->banner_m->count_all(), $limit, 4);
@@ -66,6 +67,8 @@ class Admin extends Admin_Controller
 
 	public function create()
 	{
+		$this->load->model('files/file_folders_m');
+
 		// Set the validation rules from the array above
 		$this->form_validation->set_rules($this->item_validation_rules);
 		$banner->all_pages = $this->page_m->dropdown('id', 'title');
@@ -147,6 +150,9 @@ class Admin extends Admin_Controller
 	
 	public function delete($id = 0)
 	{
+		$this->load->model('files/file_folders_m');
+		$this->load->model('banner_image_m');
+
 		// make sure the button was clicked and that there is an array of ids
 		if (isset($_POST['btnAction']) AND is_array($_POST['action_to']))
 		{
@@ -156,7 +162,7 @@ class Admin extends Admin_Controller
 		elseif (is_numeric($id))
 		{
 			// they just clicked the link so we'll delete that one
-			$this->banner_m->delete($id);
+			$this->banner_m->delete_banner($id);
 		}
 		redirect('admin/banners');
 	}

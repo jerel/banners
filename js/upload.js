@@ -22,6 +22,7 @@ jQuery(function($) {
 					$.post(SITE_URL + 'banners/ajax/add_image', { banner_id : $('input[name="banner_id"]').val() , image_id : data.image_id },
 							function(thumb){
 								$('ul#images_list').append(thumb);
+								$('div.no_data').remove();
 										
 								//refresh the prompt text
 								init_prompt();

@@ -6,6 +6,7 @@
  * @website		http://unruhdesigns.com
  * @package 	PyroCMS
  * @subpackage 	Banners Module
+ * @copyright	2012 by Jerel Unruh
  */
 class Banner_m extends MY_Model {
 
@@ -24,7 +25,19 @@ class Banner_m extends MY_Model {
 	 */
 	public function create($input)
 	{
+		// first create a folder for the images
+		$folder = array(
+			'parent_id' => 0,
+			'slug' => strtolower($input['name']),
+			'name' => lang('banners:banners').': '.$input['name'],
+			'date_added' => now()
+			);
+
+		$folder_id = $this->file_folders_m->insert($folder);
+
+		// now create a banner with the same id as the folder
 		$to_insert = array(
+			'id'			=> $folder_id,
 			'name'			=> $input['name'],
 			'text'			=> $input['text']
 			);
@@ -174,5 +187,21 @@ class Banner_m extends MY_Model {
 		}
 
 		return $banners;
+	}
+
+	public function delete_many($ids)
+	{
+		foreach ($ids AS $id)
+		{
+			$this->delete($id);
+		}
+	}
+
+	public function delete_banner($id)
+	{
+		$this->file_folders_m->delete_by('id', $id);
+		$this->banner_image_m->delete_set($id);
+
+		return $this->delete($id);
 	}
 }

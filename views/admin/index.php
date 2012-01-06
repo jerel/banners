@@ -29,7 +29,7 @@
 				<tr>
 					<td><?php echo form_checkbox('action_to[]', $banner->id); ?></td>
 					<td><?php echo $banner->name; ?></td>
-					<td><?php echo ($banner->text > '' ? substr($banner->text, 0, 40).'...' : ''); ?></td>
+					<td><?php echo ($banner->text > '' ? substr(strip_tags($banner->text), 0, 40).'...' : ''); ?></td>
 					<td><?php echo $banner->image_count; ?></td>
 					<td>
 						<?php echo

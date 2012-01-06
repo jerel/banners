@@ -1,5 +1,13 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed');
-
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+/**
+ * This is a banners module for PyroCMS
+ *
+ * @author 		Jerel Unruh - PyroCMS Dev Team
+ * @website		http://unruhdesigns.com
+ * @package 	PyroCMS
+ * @subpackage 	Banners Module
+ * @copyright	2012 by Jerel Unruh
+ */
 class Module_Banners extends Module {
 
 	public $version = '1.0';
@@ -39,7 +47,7 @@ class Module_Banners extends Module {
                         'id' => array(
 									  'type' => 'INT',
 									  'constraint' => '11',
-									  'auto_increment' => TRUE
+									  'default' => 0
 									  ),
 						'name' => array(
 										'type' => 'VARCHAR',
@@ -48,11 +56,6 @@ class Module_Banners extends Module {
 										),
 						'text' => array(
 										'type' => 'TEXT'
-										),
-						'folder_id' => array(
-										'type' => 'INT',
-										'constraint' => '11',
-										'default' => 0
 										)
 						);
 

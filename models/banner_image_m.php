@@ -6,6 +6,7 @@
  * @website		http://unruhdesigns.com
  * @package 	PyroCMS
  * @subpackage 	Banners Module
+ * @copyright	2012 by Jerel Unruh
  */
 class Banner_image_m extends MY_Model {
 
@@ -52,51 +53,33 @@ class Banner_image_m extends MY_Model {
 		return $this->upload->display_errors('', '');
 	}
 	
-	//delete the images and remove the folder for this banner
-	public function destroy_folder($id)
+	//delete the images for this banner
+	public function delete_set($id)
 	{
-		$this->load->helper('file');
-		
-		delete_files(UPLOAD_PATH . 'banner/' . $id);
+		$ids = array();
+		$images = $this->where('folder_id', $id)->get_all();
 
-		rmdir(UPLOAD_PATH . 'banner/' . $id);
-			
-		return $this->db->delete('g_images', array('banner_id' => $id));
+		// no images to delete
+		if (count($images) == 0)
+		{
+			return TRUE;
+		}
+
+		foreach ($images AS $image)
+		{
+			$ids[] = $image->id;
+			@unlink(UPLOAD_PATH.'files/'.$image->filename);
+		}
+
+		return $this->delete_many($ids);
 	}
 	
 	//delete a single image
-	public function delete_image($id, $folder_id)
+	public function delete_image($id)
 	{
 		$image = $this->get($id);
 		$this->delete($id);
 		
-		return unlink(UPLOAD_PATH . 'banner/' . $folder_id . '/' . $image->filename);
-	}
-	
-	//create the image folders
-	public function create_folders($folder_id)
-	{
-		return is_dir(UPLOAD_PATH . 'banner/' . $folder_id) OR mkdir(UPLOAD_PATH . 'banner/' . $folder_id , 0777, TRUE);
-	}
-	
-	//update the sort order of the images
-	public function update_sort($id, $i)
-	{
-		return $this->db->where('id', $id)
-						->update('g_images', array('sort' => $i));
-	}
-	
-	//update image caption
-	public function update_caption($id, $caption)
-	{
-		return $this->db->where('g_images.id', $id)
-						->update('g_images', array('`caption`' => $caption));
-	}
-	
-	//fetch the last uploaded image
-	public function get_image($image_id)
-	{	
-		return $this->db->get_where('g_images', array('id' => $image_id))
-						->row();
+		return unlink(UPLOAD_PATH.'files/'.$image->filename);
 	}
 }

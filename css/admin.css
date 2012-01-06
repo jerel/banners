@@ -2,7 +2,7 @@
 li { list-style: none; }
 
 #uploader-item h6 { text-align: center; }
-label.upload { margin: -4px 0 0 30px; max-width: 175px !important; width: 175px !important; }
+label.upload { margin: 0 auto; max-width: 175px !important; width: 175px !important; }
 
 #uploader-queue { width: 100%; height: 150px; float: left; background: transparent; padding: 10px 0 10px 0; overflow: auto; }
 #uploader-queue li { width: 500px; height: 30px; margin: 0 auto; padding: 5px 8px; vertical-align: middle; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; }
@@ -12,7 +12,7 @@ label.upload { margin: -4px 0 0 30px; max-width: 175px !important; width: 175px 
 #banners-images .delete-all-icon { margin-right: 8px; float: right; }
 #banners-images h6 { margin-bottom: 30px; }
 
-#images_list li { width:200px; height:275px; float: left; margin: 5px;	padding: 5px; position: relative; background-color: #f2f2f2; border: 1px solid #bbbbbb; border-radius: 10px; -o-border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; box-shadow: 0px 0px 12px #d8d8d8; -o-border-shadow: 0px 0px 12px #d8d8d8; -moz-box-shadow: 0px 0px 12px #d8d8d8; -webkit-box-shadow: 0px 0px 12px #d8d8d8; }
+#images_list li { width:202px; height:275px; float: left; margin: 5px;	padding: 5px; position: relative; background-color: #f2f2f2; border: 1px solid #bbbbbb; border-radius: 10px; -o-border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; box-shadow: 0px 0px 12px #d8d8d8; -o-border-shadow: 0px 0px 12px #d8d8d8; -moz-box-shadow: 0px 0px 12px #d8d8d8; -webkit-box-shadow: 0px 0px 12px #d8d8d8; }
 #images_list img { border: 1px solid #9c9fa1; }
 #images_list img:hover { border: 1px solid #3A4043; }
 #images_list .delete-icon { top: 8px; right: 8px; position:	absolute; border: 0; cursor: pointer; }

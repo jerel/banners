@@ -27,10 +27,10 @@ jQuery(function($) {
 	});
 		
 	//delete all images for this banners
-	$('div#banners-images .delete-all-icon').live('click', function(){
-		if(confirm('You are about to delete all images for this banners. Are you sure?'))
+	$('ul#banners-images .delete-all-icon').live('click', function(){
+		if(confirm('You are about to delete all images for this banner set. Are you sure?'))
 		{
-			$.post(SITE_URL + 'banners/ajax/delete_banners_images', { id : $('input[name="banner_id"]').val() },
+			$.post(SITE_URL + 'banners/ajax/delete_set', { id : $('input[name="banner_id"]').val() },
 				function(){
 					$('ul#images_list').children().remove();
 					$('.qq-upload-list').children().remove();

@@ -15,6 +15,7 @@ $lang['banners:urls']						= 'Specify url patterns to display this banner set on
 $lang['banners:no_pages']					= 'No Pages';
 $lang['banners:no_modules']					= 'No Modules';
 $lang['banners:click_to_select']			= 'Click to select';
+$lang['banners:description']				= 'Description';
 
 // Messages
 $lang['banners:create_success']				= 'The banner was created successfully';
