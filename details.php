@@ -54,6 +54,11 @@ class Module_Banners extends Module {
 										'constraint' => '100',
 										'default' => ''
 										),
+						'slug' => array(
+										'type' => 'VARCHAR',
+										'constraint' => '100',
+										'default' => ''
+										),
 						'text' => array(
 										'type' => 'TEXT'
 										)

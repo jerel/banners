@@ -14,6 +14,13 @@
 			</li>
 
 			<li class="<?php echo alternator('', 'even'); ?>">
+				<label for="slug"><?php echo lang('banners:slug'); ?></label>
+				<div class="input"><?php echo form_input('slug', set_value('slug', $banner->slug)); ?>
+									<span class="required-icon tooltip">Required</span>
+				</div>
+			</li>
+			
+			<li class="<?php echo alternator('', 'even'); ?>">
 				<label for="pages"><?php echo lang('banners:pages'); ?></label>
 				<div class="input"><?php echo form_multiselect('pages[]', array(0 => lang('banners:no_pages')) + $banner->all_pages, set_value('pages[]', $banner->pages)); ?></div>
 			</li>

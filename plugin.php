@@ -26,7 +26,10 @@ class Plugin_Banners extends Plugin
 
 		$limit = $this->attribute('limit', 0);
 		
-		$banners = $this->banner_m->get_banners($this->uri->uri_string(), $limit);
+		if ( ! $banners = $this->banner_m->get_banners($this->uri->uri_string(), $limit))
+		{
+			return '';
+		}
 
 		if ($this->content())
 		{

@@ -27,10 +27,10 @@ class Banner_m extends MY_Model {
 	{
 		// first create a folder for the images
 		$folder = array(
-			'parent_id' => 0,
-			'slug' => strtolower($input['name']),
-			'name' => lang('banners:banners').': '.$input['name'],
-			'date_added' => now()
+			'parent_id' 	=> 0,
+			'name' 			=> lang('banners:banners').': '.$input['name'],
+			'slug' 			=> 'banners-'.$input['slug'],
+			'date_added' 	=> now()
 			);
 
 		$folder_id = $this->file_folders_m->insert($folder);
@@ -39,21 +39,22 @@ class Banner_m extends MY_Model {
 		$to_insert = array(
 			'id'			=> $folder_id,
 			'name'			=> $input['name'],
+			'slug' 			=> $input['slug'],
 			'text'			=> $input['text']
 			);
 
-		$id = (int) $this->insert($to_insert);
+		$this->insert($to_insert);
 
 		// now record the uri
-		if ($id AND count($input['pages']) > 0 OR $input['urls'] > '')
+		if ($folder_id AND count($input['pages']) > 0 OR $input['urls'] > '')
 		{
-			if ( ! $this->banner_location_m->create($id, $input))
+			if ( ! $this->banner_location_m->create($folder_id, $input))
 			{
-				$id = FALSE;
+				$folder_id = FALSE;
 			}
 		}
 
-		return $id;
+		return $folder_id;
 	}
 
 	/**
@@ -69,6 +70,7 @@ class Banner_m extends MY_Model {
 	{
 		$to_update = array(
 			'name'			=> $input['name'],
+			'slug' 			=> $input['slug'],
 			'text'			=> $input['text']
 			);
 
@@ -170,6 +172,12 @@ class Banner_m extends MY_Model {
 			}
 		}
 
+		// no banners for this page
+		if (count($uri_ids) == 0)
+		{
+			return FALSE;
+		}
+
 		$banners = $this->select('*')
 			->join('banner_locations', 'banner_id = banners.id')
 			->where_in('banner_locations.id', $uri_ids)
@@ -180,7 +188,7 @@ class Banner_m extends MY_Model {
 			foreach ($banners AS &$banner)
 			{	
 				// we need to fetch the images as an array for Lex
-				$banner->images = $this->db->where('folder_id', $banner->folder_id)
+				$banner->images = $this->db->where('folder_id', $banner->banner_id)
 					->get('files')
 					->result_array();
 			}

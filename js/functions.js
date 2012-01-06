@@ -1,5 +1,7 @@
 jQuery(function($) {
 
+	pyro.generate_slug('input[name="name"]', 'input[name="slug"]');
+
 	$('ul#images_list').sortable({
 		handle: 'img',
 		start: function(event, ui) {

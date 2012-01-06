@@ -6,6 +6,7 @@ $lang['banners:edit']						= 'Edit Banner';
 $lang['banners:editing']					= 'Editing Banner "%s"';
 $lang['banners:list_banners']				= 'List Banners';
 $lang['banners:name']						= 'Banner Name';
+$lang['banners:slug']						= 'Banner Slug';
 $lang['banners:text']						= 'Banner Text';
 $lang['banners:images']						= 'Images';
 $lang['banners:pages']						= 'Select Pages to display this banner set on';

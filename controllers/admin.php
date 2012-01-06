@@ -28,6 +28,11 @@ class Admin extends Admin_Controller
 				'rules' => 'trim|max_length[100]|required'
 			),
 			array(
+				'field' => 'slug',
+				'label' => 'Slug',
+				'rules' => 'trim|max_length[100]|required'
+			),
+			array(
 				'field' => 'text',
 				'label' => 'Text',
 				'rules' => 'trim'
@@ -98,6 +103,7 @@ class Admin extends Admin_Controller
 		$data->banner = $banner;
 		$this->template->title($this->module_details['name'], lang('banners:create'))
 						->append_metadata($this->load->view('fragments/wysiwyg', NULL, TRUE))
+						->append_metadata(js('functions.js', 'banners'))
 						->build('admin/form', $data);
 	}
 	
@@ -128,6 +134,7 @@ class Admin extends Admin_Controller
 		$data->banner = $banner;
 		$this->template->title($this->module_details['name'], lang('banners:edit'))
 						->append_metadata($this->load->view('fragments/wysiwyg', NULL, TRUE))
+						->append_metadata(js('functions.js', 'banners'))
 						->build('admin/form', $data);
 	}
 
