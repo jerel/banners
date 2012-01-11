@@ -74,14 +74,14 @@ class Banner_m extends MY_Model {
 			'text'			=> $input['text']
 			);
 
-		$id = (int) $this->update($id, $to_update);
+		$result = $this->update($id, $to_update);
 
 		// now record the uri
-		if ($id AND count($input['pages']) > 0 OR $input['urls'] > '')
+		if ($result AND count($input['pages']) > 0 OR $input['urls'] > '')
 		{
 			if ( ! $this->banner_location_m->update_location($id, $input))
 			{
-				$id = FALSE;
+				return FALSE;
 			}
 		}
 
@@ -142,12 +142,13 @@ class Banner_m extends MY_Model {
 	 * 
 	 * get all banners for the current page/uri
 	 *
-	 * @param 	string 	$uri 	The current uri
-	 * @param 	string 	$limit 	database limit
+	 * @param 	$params array
 	 * @return 	mixed
 	 */
-	public function get_banners($uri, $limit)
+	public function get_banners($params)
 	{
+		extract($params);
+
 		$uri_ids = array();
 
 		// they're on the home page so there is no uri, we'll need to get it ourselves
@@ -179,16 +180,20 @@ class Banner_m extends MY_Model {
 		}
 
 		$banners = $this->select('*')
-			->join('banner_locations', 'banner_id = banners.id')
+			->join('banner_locations', 'banner_id = banners.id', 'left')
 			->where_in('banner_locations.id', $uri_ids)
+			->order_by($order_by, $order_dir)
+			->limit($limit)
 			->get_all();
 
 		if ($banners)
 		{
 			foreach ($banners AS &$banner)
-			{	
+			{
 				// we need to fetch the images as an array for Lex
 				$banner->images = $this->db->where('folder_id', $banner->banner_id)
+					->order_by($image_order_by, $image_order_dir)
+					->limit($image_limit)
 					->get('files')
 					->result_array();
 			}

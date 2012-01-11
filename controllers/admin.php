@@ -117,7 +117,7 @@ class Admin extends Admin_Controller
 		if($this->form_validation->run())
 		{
 			// See if the model can create the record
-			if(($id = $this->banner_m->update_banner($id, $this->input->post())) > 0)
+			if($this->banner_m->update_banner($id, $this->input->post()))
 			{
 				// All good...
 				$this->session->set_flashdata('success', lang('banners:edit_success'));
