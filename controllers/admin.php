@@ -84,6 +84,7 @@ class Admin extends Admin_Controller
 			if(($id = $this->banner_m->create($this->input->post())) > 0)
 			{
 				// All good...
+				$this->pyrocache->delete_all('banner_m');
 				$this->session->set_flashdata('success', lang('banners:create_success'));
 				redirect('admin/banners/images/'.$id);
 			}
@@ -120,6 +121,7 @@ class Admin extends Admin_Controller
 			if($this->banner_m->update_banner($id, $this->input->post()))
 			{
 				// All good...
+				$this->pyrocache->delete_all('banner_m');
 				$this->session->set_flashdata('success', lang('banners:edit_success'));
 				redirect('admin/banners');
 			}
@@ -171,6 +173,8 @@ class Admin extends Admin_Controller
 			// they just clicked the link so we'll delete that one
 			$this->banner_m->delete_banner($id);
 		}
+		$this->pyrocache->delete_all('banner_m');
+		
 		redirect('admin/banners');
 	}
 }

@@ -17,6 +17,7 @@ class Ajax extends Admin_Controller
 		// Load all the required classes
 		$this->load->model('banner_image_m');
 		$this->lang->load('banners');
+		$this->pyrocache->delete_all('banner_m');
 	}
 	
 	//delete one image
