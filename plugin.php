@@ -25,13 +25,17 @@ class Plugin_Banners extends Plugin
 		$this->load->model('banners/banner_m');
 		$this->load->model('banners/banner_location_m');
 
-		$debug = $this->attribute('debug', FALSE);
-		$limit = $this->attribute('limit', 5);
-		$image_limit = $this->attribute('image-limit', 5);
-		$order_by = $this->attribute('order-by', 'name');
-		$order_dir = $this->attribute('order-dir', 'random');
-		$image_order_by = $this->attribute('image-order-by', 'sort');
-		$image_order_dir = $this->attribute('image-order-dir');
+		$debug 				= $this->attribute('debug', FALSE);
+		$width 				= $this->attribute('width');
+		$height 			= $this->attribute('height');
+		$mode 				= $this->attribute('mode');
+
+		$limit 				= $this->attribute('limit', 5);
+		$image_limit 		= $this->attribute('image-limit', 5);
+		$order_by 			= $this->attribute('order-by', 'name');
+		$order_dir 			= $this->attribute('order-dir', 'random');
+		$image_order_by 	= $this->attribute('image-order-by', 'sort');
+		$image_order_dir 	= $this->attribute('image-order-dir');
 
 		$params = array(
 			'uri' 				=> $this->uri->uri_string(), 
@@ -68,7 +72,7 @@ class Plugin_Banners extends Plugin
 			{
 				foreach ($banner->images AS $image)
 				{
-					$output .= '<img src="'.site_url('files/large/'.$image['id']).'" alt="'.$image['name'].'" title="'.$image['description'].'"/>';
+					$output .= '<img src="'.site_url('files/large/'.$image['filename'].'/'.$width.'/'.$height.'/'.$mode).'" alt="'.$image['name'].'" title="'.$image['description'].'"/>';
 				}
 			}
 
