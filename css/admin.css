@@ -23,3 +23,7 @@ label.upload { margin: 0 auto; max-width: 175px !important; width: 175px !import
 
 /*css styles for caption prompt text */
 .prompt-text-active { color: #a1a1a1; font-style: italic; }
+
+.show_options, .hide_options { text-decoration: underline; }
+.hide_options { display: none; }
+li.advanced { display: none; }

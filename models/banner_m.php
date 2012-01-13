@@ -179,10 +179,13 @@ class Banner_m extends MY_Model {
 			return FALSE;
 		}
 
-		$banners = $this->select('*')
+		$this->select('*')
 			->join('banner_locations', 'banner_id = banners.id', 'left')
-			->where_in('banner_locations.id', $uri_ids)
-			->order_by($order_by, $order_dir)
+			->where_in('banner_locations.id', $uri_ids);
+
+		if ($slug) $this->where('slug', $slug);
+
+		$banners = $this->order_by($order_by, $order_dir)
 			->limit($limit)
 			->get_all();
 

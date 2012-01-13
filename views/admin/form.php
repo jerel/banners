@@ -26,6 +26,14 @@
 			</li>
 
 			<li class="<?php echo alternator('', 'even'); ?>">
+				<label></label>
+				<div class="input">
+					<span class="show_options"><?php echo lang('banners:show'); ?></span>
+					<span class="hide_options"><?php echo lang('banners:hide'); ?></span>
+				</div>
+			</li>
+
+			<li class="advanced <?php echo alternator('', 'even'); ?>">
 				<label for="urls"><?php echo lang('banners:urls'); ?></label>
 				<div class="input"><?php echo form_textarea('urls', set_value('urls', $banner->urls)); ?></div>
 			</li>

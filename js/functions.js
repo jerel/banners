@@ -39,7 +39,17 @@ jQuery(function($) {
 				});
 		}
 	});
-		
+
+	if ($('li.advanced textarea').val() > '') {
+		$('span.show_options, span.hide_options').toggle();
+		$('li.advanced').slideDown();
+	}
+
+	$('span.show_options, span.hide_options').click(function(){
+		$('span.show_options, span.hide_options').toggle();
+		$('li.advanced').slideToggle();
+	});
+
 	window.init_prompt = function() {
 		//delay for the description update
 		var typedelay = (function(){

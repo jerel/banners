@@ -10,9 +10,11 @@ $lang['banners:slug']						= 'Slug for Banner Set';
 $lang['banners:text']						= 'Banner Set Text';
 $lang['banners:images']						= 'Images';
 $lang['banners:pages']						= 'Select Pages to display this banner set on';
+$lang['banners:hide']						= 'Hide Advanced Options';
+$lang['banners:show']						= 'Show Advanced Options';
 $lang['banners:urls']						= 'Specify url patterns to display this banner set on. 
 												<br />One url pattern per line. <br />
-												<a class="modal" href="'.site_url('admin/help/banners').'">Documentation</a>';
+												<a class="modal" href="'.site_url('admin/help/banners#patterns').'">Documentation</a>';
 $lang['banners:no_pages']					= 'No Pages';
 $lang['banners:no_modules']					= 'No Modules';
 $lang['banners:click_to_select']			= 'Click to upload images';

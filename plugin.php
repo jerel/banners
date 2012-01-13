@@ -26,6 +26,7 @@ class Plugin_Banners extends Plugin
 		$this->load->model('banners/banner_location_m');
 
 		$debug 				= $this->attribute('debug', FALSE);
+		$slug				= $this->attribute('slug', FALSE);
 		$width 				= $this->attribute('width');
 		$height 			= $this->attribute('height');
 		$mode 				= $this->attribute('mode');
@@ -38,7 +39,8 @@ class Plugin_Banners extends Plugin
 		$image_order_dir 	= $this->attribute('image-order-dir');
 
 		$params = array(
-			'uri' 				=> $this->uri->uri_string(), 
+			'uri' 				=> $this->uri->uri_string(),
+			'slug'				=> $slug, 
 			'limit'				=> $limit, 
 			'image_limit'		=> $image_limit, 
 			'order_by'			=> $order_by, 
