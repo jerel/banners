@@ -1,13 +1,13 @@
 <?php
 // Labels
 $lang['banners:banners']					= 'Banners';
-$lang['banners:create']						= 'Add Banner';
-$lang['banners:edit']						= 'Edit Banner';
-$lang['banners:editing']					= 'Editing Banner "%s"';
-$lang['banners:list_banners']				= 'List Banners';
-$lang['banners:name']						= 'Banner Name';
-$lang['banners:slug']						= 'Banner Slug';
-$lang['banners:text']						= 'Banner Text';
+$lang['banners:create']						= 'Add Banner Set';
+$lang['banners:edit']						= 'Edit Banner Set';
+$lang['banners:editing']					= 'Editing Banner Set "%s"';
+$lang['banners:list_banners']				= 'List Banner Sets';
+$lang['banners:name']						= 'Name for Banner Set';
+$lang['banners:slug']						= 'Slug for Banner Set';
+$lang['banners:text']						= 'Banner Set Text';
 $lang['banners:images']						= 'Images';
 $lang['banners:pages']						= 'Select Pages to display this banner set on';
 $lang['banners:urls']						= 'Specify url patterns to display this banner set on. 
@@ -15,7 +15,7 @@ $lang['banners:urls']						= 'Specify url patterns to display this banner set on
 												<a class="modal" href="'.site_url('admin/help/banners').'">Documentation</a>';
 $lang['banners:no_pages']					= 'No Pages';
 $lang['banners:no_modules']					= 'No Modules';
-$lang['banners:click_to_select']			= 'Click to select';
+$lang['banners:click_to_select']			= 'Click to upload images';
 $lang['banners:description']				= 'Description';
 
 // Messages
