@@ -25,6 +25,9 @@ class Plugin_Banners extends Plugin
 		$this->load->model('banners/banner_m');
 		$this->load->model('banners/banner_location_m');
 
+		// since a 404 page's uri can be anything we must detect it and set the uri to 404 manually
+		$page_404 = isset($this->template->page->slug) ? $this->template->page->slug == 404 : FALSE;
+
 		$debug 				= $this->attribute('debug', FALSE);
 		$slug				= $this->attribute('slug', FALSE);
 		$width 				= $this->attribute('width');
@@ -39,7 +42,7 @@ class Plugin_Banners extends Plugin
 		$image_order_dir 	= $this->attribute('image-order-dir');
 
 		$params = array(
-			'uri' 				=> $this->uri->uri_string(),
+			'uri' 				=> $page_404 ? 404 : $this->uri->uri_string(),
 			'slug'				=> $slug, 
 			'limit'				=> $limit, 
 			'image_limit'		=> $image_limit, 
