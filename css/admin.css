@@ -2,7 +2,8 @@
 li { list-style: none; }
 
 #uploader-item h6 { text-align: center; }
-label.upload { margin: 0 auto; max-width: 175px !important; width: 175px !important; }
+label { cursor: default; }
+label.upload { cursor: pointer; margin: 0 auto; max-width: 175px !important; width: 175px !important; }
 
 #uploader-queue { width: 100%; height: 150px; float: left; background: transparent; padding: 10px 0 10px 0; overflow: auto; }
 #uploader-queue li { width: 500px; height: 30px; margin: 0 auto; padding: 5px 8px; vertical-align: middle; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; }
@@ -24,6 +25,6 @@ label.upload { margin: 0 auto; max-width: 175px !important; width: 175px !import
 /*css styles for caption prompt text */
 .prompt-text-active { color: #a1a1a1; font-style: italic; }
 
-.show_options, .hide_options { text-decoration: underline; }
+.show_options, .hide_options { text-decoration: underline; cursor: pointer; }
 .hide_options { display: none; }
 li.advanced { display: none; }

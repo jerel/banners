@@ -29,7 +29,7 @@
 				<label></label>
 				<div class="input">
 					<span class="show_options"><?php echo lang('banners:show'); ?></span>
-					<span class="hide_options"><?php echo lang('banners:hide'); ?></span>
+					<span style="display:none" class="hide_options"><?php echo lang('banners:hide'); ?></span>
 				</div>
 			</li>
 
