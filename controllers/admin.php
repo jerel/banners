@@ -104,8 +104,8 @@ class Admin extends Admin_Controller
 		$data->banner = $banner;
 		$this->template->title($this->module_details['name'], lang('banners:create'))
 						->append_metadata($this->load->view('fragments/wysiwyg', NULL, TRUE))
-						->append_metadata(js('functions.js', 'banners'))
-						->append_metadata(css('admin.css', 'banners'))
+						->append_js('module::functions.js')
+						->append_css('module::admin.css')
 						->build('admin/form', $data);
 	}
 	
@@ -137,8 +137,8 @@ class Admin extends Admin_Controller
 		$data->banner = $banner;
 		$this->template->title($this->module_details['name'], lang('banners:edit'))
 						->append_metadata($this->load->view('fragments/wysiwyg', NULL, TRUE))
-						->append_metadata(js('functions.js', 'banners'))
-						->append_metadata(css('admin.css', 'banners'))
+						->append_js('module::functions.js')
+						->append_css('module::admin.css')
 						->build('admin/form', $data);
 	}
 
@@ -150,12 +150,12 @@ class Admin extends Admin_Controller
 		$data->banner->images 	= $this->banner_image_m->where('folder_id', $id)->get_all();
 
 		$this->template->title($this->module_details['name'], lang('banners:edit'))
-						->append_metadata(css('admin.css', 'banners'))
-						->append_metadata(css('jquery.fileupload-ui.css', 'banners'))
-						->append_metadata(js('jquery.fileupload-ui.js', 'banners'))
-						->append_metadata(js('jquery.fileupload.js', 'banners'))
-						->append_metadata(js('upload.js', 'banners'))
-						->append_metadata(js('functions.js', 'banners'))
+						->append_css('module::admin.css')
+						->append_css('module::jquery.fileupload-ui.css')
+						->append_js('module::jquery.fileupload-ui.js')
+						->append_js('module::jquery.fileupload.js')
+						->append_js('module::upload.js')
+						->append_js('module::functions.js')
 						->build('admin/images', $data);
 	}
 	
